@@ -20,6 +20,9 @@ bool	keys[256];			// Array Used For The Keyboard Routine
 bool	active = TRUE;		// Window Active Flag Set To TRUE By Default
 bool	fullscreen = TRUE;	// Fullscreen Flag Set To Fullscreen Mode By Default
 
+GLfloat     rtri = 0;                       // Angle For The Triangle
+GLfloat     rquad = 0;                      // Angle For The Quad   
+
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
 GLvoid ReSizeGLScene(GLsizei width, GLsizei height)		// Resize And Initialize The GL Window
@@ -58,6 +61,7 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 
 	glLoadIdentity();									// Reset The Current Modelview Matrix
 	glTranslatef(-1.5f, 0.0f, -6.0f);					// Move Left 1.5 Units And Into The Screen 6.0
+	glRotatef(rtri, 0.0f, 1.0f, 0.0f);					// Rotate The Triangle On The Y axis
 	glBegin(GL_TRIANGLES);								// Drawing Using Triangles
 	glColor3f(1.0f, 0.0f, 0.0f);							// Set the Color to Red
 	glVertex3f(0.0f, 1.0f, 0.0f);							// Top
@@ -70,12 +74,16 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 	glLoadIdentity();									// Reset The Current Modelview Matrix
 	glTranslatef(1.5f, 0.0f, -6.0f);						// Move Right 3 Units
 	glColor3f(0.5f, 0.5f, 1.0f);						// Set The Color To Blue One Time Only
+	glRotatef(rquad, 1.0f, 0.0f, 0.0f);					// Rotate The Quad On The X axis
 	glBegin(GL_QUADS);									// Draw A Quad
 	glVertex3f(-1.0f, 1.0f, 0.0f);							// Top Left
 	glVertex3f(1.0f, 1.0f, 0.0f);							// Top Right
 	glVertex3f(1.0f, -1.0f, 0.0f);							// Bottom Right
 	glVertex3f(-1.0f, -1.0f, 0.0f);							// Bottom Left
 	glEnd();											// Done Drawing The Quad
+
+	rtri += 0.5f;										// Increase The Rotation Variable For The Triangle
+	rquad -= 0.3f;										 // Decrease The Rotation Variable For The Quad
 
 	return TRUE;										// Everything Went OK
 }

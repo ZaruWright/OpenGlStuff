@@ -18,7 +18,10 @@ HINSTANCE	hInstance;		// Holds The Instance Of The Application
 
 bool	keys[256];			// Array Used For The Keyboard Routine
 bool	active = TRUE;		// Window Active Flag Set To TRUE By Default
-bool	fullscreen = TRUE;	// Fullscreen Flag Set To Fullscreen Mode By Default  
+bool	fullscreen = TRUE;	// Fullscreen Flag Set To Fullscreen Mode By Default
+
+GLfloat     rtri = 0;                       // Angle For The Triangle
+GLfloat     rquad = 0;                      // Angle For The Quad   
 
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
@@ -58,24 +61,77 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 
 	glLoadIdentity();									// Reset The Current Modelview Matrix
 	glTranslatef(-1.5f, 0.0f, -6.0f);					// Move Left 1.5 Units And Into The Screen 6.0
-	glBegin(GL_TRIANGLES);								// Drawing Using Triangles
-	glColor3f(1.0f, 0.0f, 0.0f);							// Set the Color to Red
-	glVertex3f(0.0f, 1.0f, 0.0f);							// Top
-	glColor3f(0.0f, 1.0f, 0.0f);							// Set the Color to Green
-	glVertex3f(-1.0f, -1.0f, 0.0f);							// Bottom Left
-	glColor3f(0.0f, 0.0f, 1.0f);							// Set the Color to Blue
-	glVertex3f(1.0f, -1.0f, 0.0f);							// Bottom Right
+	glRotatef(rtri, 0.0f, 1.0f, 0.0f);					// Rotate The Pyramid On The Y axis
+	glBegin(GL_TRIANGLES);								// Starting Drawing the Pyramid
+	// Front Face
+	glColor3f(1.0f, 0.0f, 0.0f);					// Red
+	glVertex3f(0.0f, 1.0f, 0.0f);						// Top Of Triangle (Front)
+	glColor3f(0.0f, 1.0f, 0.0f);					// Green
+	glVertex3f(-1.0f, -1.0f, 1.0f);						// Left Of Triangle (Front)
+	glColor3f(0.0f, 0.0f, 1.0f);					// Blue
+	glVertex3f(1.0f, -1.0f, 1.0f);						// Right Of Triangle (Front)
+	// Right Face
+	glColor3f(1.0f, 0.0f, 0.0f);					// Red
+	glVertex3f(0.0f, 1.0f, 0.0f);						// Top Of Triangle (Right)
+	glColor3f(0.0f, 0.0f, 1.0f);					// Blue
+	glVertex3f(1.0f, -1.0f, 1.0f);						// Left Of Triangle (Right)
+	glColor3f(0.0f, 1.0f, 0.0f);					// Green
+	glVertex3f(1.0f, -1.0f, -1.0f);						// Right Of Triangle (Right)
+	// Back Face
+	glColor3f(1.0f, 0.0f, 0.0f);					// Red
+	glVertex3f(0.0f, 1.0f, 0.0f);						// Top Of Triangle (Back)
+	glColor3f(0.0f, 1.0f, 0.0f);					// Green
+	glVertex3f(1.0f, -1.0f, -1.0f);						// Left Of Triangle (Back)
+	glColor3f(0.0f, 0.0f, 1.0f);					// Blue
+	glVertex3f(-1.0f, -1.0f, -1.0f);						// Right Of Triangle (Back)
+	// Left Face
+	glColor3f(1.0f, 0.0f, 0.0f);					// Red
+	glVertex3f(0.0f, 1.0f, 0.0f);						// Top Of Triangle (Left)
+	glColor3f(0.0f, 0.0f, 1.0f);					// Blue
+	glVertex3f(-1.0f, -1.0f, -1.0f);						// Left Of Triangle (Left)
+	glColor3f(0.0f, 1.0f, 0.0f);					// Green
+	glVertex3f(-1.0f, -1.0f, 1.0f);						// Right Of Triangle (Left)
 	glEnd();											// Finished Drawing The Triangle
 
 	glLoadIdentity();									// Reset The Current Modelview Matrix
 	glTranslatef(1.5f, 0.0f, -6.0f);						// Move Right 3 Units
 	glColor3f(0.5f, 0.5f, 1.0f);						// Set The Color To Blue One Time Only
+	glRotatef(rquad, 1.0f, 0.0f, 0.0f);					// Rotate The Quad On The X axis
 	glBegin(GL_QUADS);									// Draw A Quad
-	glVertex3f(-1.0f, 1.0f, 0.0f);							// Top Left
-	glVertex3f(1.0f, 1.0f, 0.0f);							// Top Right
-	glVertex3f(1.0f, -1.0f, 0.0f);							// Bottom Right
-	glVertex3f(-1.0f, -1.0f, 0.0f);							// Bottom Left
+	// Top
+	glColor3f(0.0f, 1.0f, 0.0f);          // Set The Color To Green
+	glVertex3f(1.0f, 1.0f, -1.0f);          // Top Right Of The Quad (Top)
+	glVertex3f(-1.0f, 1.0f, -1.0f);          // Top Left Of The Quad (Top)
+	glVertex3f(-1.0f, 1.0f, 1.0f);          // Bottom Left Of The Quad (Top)
+	glVertex3f(1.0f, 1.0f, 1.0f);          // Bottom Right Of The Quad (Top)
+	// Bottom
+	glColor3f(1.0f, 0.5f, 0.0f);          // Set The Color To Orange
+	glVertex3f(1.0f, -1.0f, 1.0f);          // Top Right Of The Quad (Bottom)
+	glVertex3f(-1.0f, -1.0f, 1.0f);          // Top Left Of The Quad (Bottom)
+	glVertex3f(-1.0f, -1.0f, -1.0f);          // Bottom Left Of The Quad (Bottom)
+	glVertex3f(1.0f, -1.0f, -1.0f);          // Bottom Right Of The Quad (Bottom)
+	// Front
+	glColor3f(1.0f, 0.0f, 0.0f);          // Set The Color To Red
+	glVertex3f(1.0f, 1.0f, 1.0f);          // Top Right Of The Quad (Front)
+	glVertex3f(-1.0f, 1.0f, 1.0f);          // Top Left Of The Quad (Front)
+	glVertex3f(-1.0f, -1.0f, 1.0f);          // Bottom Left Of The Quad (Front)
+	glVertex3f(1.0f, -1.0f, 1.0f);          // Bottom Right Of The Quad (Front)
+	// Back
+	glColor3f(1.0f, 1.0f, 0.0f);          // Set The Color To Yellow
+	glVertex3f(1.0f, -1.0f, -1.0f);          // Bottom Left Of The Quad (Back)
+	glVertex3f(-1.0f, -1.0f, -1.0f);          // Bottom Right Of The Quad (Back)
+	glVertex3f(-1.0f, 1.0f, -1.0f);          // Top Right Of The Quad (Back)
+	glVertex3f(1.0f, 1.0f, -1.0f);          // Top Left Of The Quad (Back)
+	// Left
+	glColor3f(0.0f, 0.0f, 1.0f);          // Set The Color To Blue
+	glVertex3f(-1.0f, 1.0f, 1.0f);          // Top Right Of The Quad (Left)
+	glVertex3f(-1.0f, 1.0f, -1.0f);          // Top Left Of The Quad (Left)
+	glVertex3f(-1.0f, -1.0f, -1.0f);          // Bottom Left Of The Quad (Left)
+	glVertex3f(-1.0f, -1.0f, 1.0f);          // Bottom Right Of The Quad (Left)
 	glEnd();											// Done Drawing The Quad
+
+	rtri += 0.5f;										// Increase The Rotation Variable For The Triangle
+	rquad -= 0.3f;										 // Decrease The Rotation Variable For The Quad
 
 	return TRUE;										// Everything Went OK
 }
@@ -206,7 +262,7 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 	// Create The Window
 	if (!(hWnd = CreateWindowEx(dwExStyle,							// Extended Style For The Window
 		TEXT("OpenGL"),							// Class Name
-		(LPCSTR) title,								// Window Title
+		(LPCSTR)title,								// Window Title
 		dwStyle |							// Defined Window Style
 		WS_CLIPSIBLINGS |					// Required Window Style
 		WS_CLIPCHILDREN,					// Required Window Style
@@ -367,7 +423,7 @@ int WINAPI WinMain(HINSTANCE	hInstance,			// Instance
 	// Ask The User Which Screen Mode They Prefer
 	/*if (MessageBoxA(NULL, "Would You Like To Run In Fullscreen Mode?", "Start FullScreen?", MB_YESNO | MB_ICONQUESTION) == IDNO)
 	{
-		fullscreen = FALSE;							// Windowed Mode
+	fullscreen = FALSE;							// Windowed Mode
 	}*/
 	fullscreen = FALSE;
 

@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AddColourToPolygons", "Proj
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Rotation", "Projects\Rotation\Rotation.vcxproj", "{3D314731-CF28-42B0-B269-7724E54E6BA7}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3DShapes", "Projects\3DShapes\3DShapes.vcxproj", "{96FA1315-EC7F-4BF9-A7B6-55668E57E0F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -33,6 +35,10 @@ Global
 		{3D314731-CF28-42B0-B269-7724E54E6BA7}.Debug|Win32.Build.0 = Debug|Win32
 		{3D314731-CF28-42B0-B269-7724E54E6BA7}.Release|Win32.ActiveCfg = Release|Win32
 		{3D314731-CF28-42B0-B269-7724E54E6BA7}.Release|Win32.Build.0 = Release|Win32
+		{96FA1315-EC7F-4BF9-A7B6-55668E57E0F1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{96FA1315-EC7F-4BF9-A7B6-55668E57E0F1}.Debug|Win32.Build.0 = Debug|Win32
+		{96FA1315-EC7F-4BF9-A7B6-55668E57E0F1}.Release|Win32.ActiveCfg = Release|Win32
+		{96FA1315-EC7F-4BF9-A7B6-55668E57E0F1}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\Rotation\window.cpp">
+    <ClCompile Include="..\..\Source\3DShapes\window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
